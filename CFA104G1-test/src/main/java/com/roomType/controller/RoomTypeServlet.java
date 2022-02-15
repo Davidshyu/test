@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import com.mysql.cj.jdbc.Blob;
 import com.room.model.RoomService;
 import com.room.model.RoomVO;
 import com.roomType.model.*;
