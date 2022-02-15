@@ -279,6 +279,30 @@ public class RoomOrderListServlet extends HttpServlet{
 				RequestDispatcher failureView = req.getRequestDispatcher("listAllRoomOrderList.jsp");
 				failureView.forward(req, res);
 			}		
-		}		
+		}
+	if ("SaveDateAndShowCheckOut".equals(action)) {
+			
+			String anc = null;	
+			java.sql.Date arrival_date= null; 
+			
+			arrival_date = java.sql.Date.valueOf(req.getParameter("arrival_date").trim());
+			
+			java.sql.Date departure_date= null; 
+			
+			departure_date=java.sql.Date.valueOf(req.getParameter("departure_date").trim());
+			
+			RoomOrderListVO roomOrderListVO = new RoomOrderListVO();
+			roomOrderListVO.setArrival_date(arrival_date);
+			roomOrderListVO.setDeparture_date(departure_date);
+			
+			req.setAttribute("roomOrderListVO", roomOrderListVO);
+			
+				
+				String url = "/";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);		
+				
+			
+		}
 	}
 }

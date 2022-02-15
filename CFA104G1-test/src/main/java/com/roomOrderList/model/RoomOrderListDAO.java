@@ -8,7 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 import oracle.net.aso.r;
 
@@ -16,12 +19,18 @@ import oracle.net.aso.r;
 
 
 
-public class RoomOrderListJDBCDAO implements RoomOrderListDAO_interface  {
+public class RoomOrderListDAO implements RoomOrderListDAO_interface  {
 	
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/db01?serverTimezone=Asia/Taipei";
-	String userid = "root";
-	String passwd = "qazwsx";
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CFA104G1");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
+	
 
 	private static final String INSERT_STMT = 
 	"INSERT INTO CFA104G1.ROOM_ORDER_LIST (room_id,room_order_id,number_of_people,arrival_date,departure_date,special_req,room_price,service_order_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -41,8 +50,7 @@ public class RoomOrderListJDBCDAO implements RoomOrderListDAO_interface  {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 		
@@ -59,11 +67,7 @@ public class RoomOrderListJDBCDAO implements RoomOrderListDAO_interface  {
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
+		}  catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
@@ -93,8 +97,7 @@ public class RoomOrderListJDBCDAO implements RoomOrderListDAO_interface  {
 	
 		try {
 			
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 	
 
@@ -113,11 +116,7 @@ public class RoomOrderListJDBCDAO implements RoomOrderListDAO_interface  {
 		
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
+		}  catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
@@ -148,8 +147,7 @@ public class RoomOrderListJDBCDAO implements RoomOrderListDAO_interface  {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setInt(1, room_order_list_id);
@@ -157,11 +155,7 @@ public class RoomOrderListJDBCDAO implements RoomOrderListDAO_interface  {
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
+		}  catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
@@ -193,8 +187,7 @@ public class RoomOrderListJDBCDAO implements RoomOrderListDAO_interface  {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setInt(1, room_order_list_id);
@@ -216,10 +209,6 @@ public class RoomOrderListJDBCDAO implements RoomOrderListDAO_interface  {
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -261,8 +250,7 @@ public class RoomOrderListJDBCDAO implements RoomOrderListDAO_interface  {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -281,11 +269,7 @@ public class RoomOrderListJDBCDAO implements RoomOrderListDAO_interface  {
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
+		}  catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
@@ -316,7 +300,7 @@ public class RoomOrderListJDBCDAO implements RoomOrderListDAO_interface  {
 	}
 	
 	public static void main(String[] args) {
-		RoomOrderListJDBCDAO dao = new RoomOrderListJDBCDAO();
+		RoomOrderListDAO dao = new RoomOrderListDAO();
 
 		// 新增
 //		ProductVO productVO1 = new ProductVO();

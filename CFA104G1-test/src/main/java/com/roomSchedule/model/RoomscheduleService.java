@@ -8,7 +8,7 @@ public class RoomscheduleService {
 	private RoomScheduleDAO_interface dao;
 	
 	public RoomscheduleService() {
-		dao = new RoomScheduleJDBCDAO();
+		dao = new RoomScheduleDAO();
 	}
 	
 	public RoomScheduleVO addRoomSchedule(Integer room_type_id,Date room_schedule_date,Integer room_amount,Integer room_rsv_booked) {

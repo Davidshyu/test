@@ -17,7 +17,7 @@ import com.roomSchedule.model.RoomscheduleService;
 /**
  * Servlet implementation class RoomScheduleServlet
  */
-@WebServlet("/back-end/roomSchedule/roomSchedule.do")
+@WebServlet("/roomSchedule/roomSchedule.do")
 public class RoomScheduleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -155,6 +155,7 @@ public class RoomScheduleServlet extends HttpServlet {
 		}
 		if ("insert".equals(action)) {
 			
+			
 			List<String> errorMsgs = new LinkedList<String>();
 			request.setAttribute("errorMsgs", errorMsgs);
 			try {
@@ -178,21 +179,20 @@ public class RoomScheduleServlet extends HttpServlet {
 				
 				if(!errorMsgs.isEmpty()) {
 					request.setAttribute("roomScheduleVOO", roomScheduleVO);
-					RequestDispatcher failureView = request.getRequestDispatcher("addRoomSchedule.jsp");
+					RequestDispatcher failureView = request.getRequestDispatcher("/back-end/roomScheduleaddRoomSchedule.jsp");
 					failureView.forward(request, response);
 					return;
 				}
 				
 				RoomscheduleService roomscheduleSvc =new  RoomscheduleService();
 				roomscheduleSvc.addRoomSchedule(room_type_id, room_schedule_date, room_amount, room_rsv_booked);
-				
-				String url = "showAllRoomSchedule.jsp";
+				String url = "/back-end/roomSchedule/showAllRoomSchedule.jsp";
 				RequestDispatcher sucessView = request.getRequestDispatcher(url);
 				sucessView.forward(request, response);
 				
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = request.getRequestDispatcher("addRoomSchedule.jsp");
+				RequestDispatcher failureView = request.getRequestDispatcher("/back-end/roomScheduleaddRoomSchedule.jsp");
 				failureView.forward(request, response);
 			}
 		
@@ -223,6 +223,8 @@ public class RoomScheduleServlet extends HttpServlet {
 			}
 
 		}
+		
+	
 		
 	}
 

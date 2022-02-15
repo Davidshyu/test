@@ -8,7 +8,7 @@ public class RoomOrderService {
 	private RoomOrderDAO_interface dao;
 	
 	public RoomOrderService() {
-		dao = new RoomOrderJDBCDAO();
+		dao = new RoomOrderDAO();
 	}
 	
 	public RoomOrderVO addRoomOrder( Integer mem_id,Date order_date,Integer room_order_status,
