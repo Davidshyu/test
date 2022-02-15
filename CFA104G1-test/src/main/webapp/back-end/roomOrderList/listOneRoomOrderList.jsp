@@ -64,7 +64,8 @@
 		<th>退房日期</th>
 		<th>特殊要求</th>
 		<th>房間價格</th>
-		<th>服務訂單編號</th>	
+		<th>服務訂單編號</th>
+		<th>房型編號</th>
 	</tr>
 	<tr>
 		<td><%=roomOrderListVO.getRoom_order_list_id() %></td>
@@ -76,6 +77,7 @@
 		<td><%=roomOrderListVO.getSpecial_req() %></td>
 		<td><%=roomOrderListVO.getRoom_price() %></td>
 		<td><%=roomOrderListVO.getService_order_id() %></td>
+		<td><%=roomOrderListVO.getRoom_type_id() %></td>
 	</tr>
 </table>
 

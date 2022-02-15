@@ -12,7 +12,7 @@ public class RoomOrderListService {
 	}
 	
 	public RoomOrderListVO addRoom_order_list(Integer room_id,Integer room_order_id,Integer number_of_people,
-			Date arrival_date,Date departure_date,String special_req,Integer room_price,Integer service_order_id) {
+			Date arrival_date,Date departure_date,String special_req,Integer room_price,Integer service_order_id,Integer room_type_id) {
 		RoomOrderListVO roomOrderListVO = new RoomOrderListVO();
 		
 		roomOrderListVO.setRoom_id(room_id);
@@ -23,6 +23,7 @@ public class RoomOrderListService {
 		roomOrderListVO.setSpecial_req(special_req);
 		roomOrderListVO.setRoom_price(room_price);
 		roomOrderListVO.setService_order_id(service_order_id);
+		roomOrderListVO.setRoom_type_id(room_type_id);
 		
 		dao.insert(roomOrderListVO);
 		
@@ -30,7 +31,7 @@ public class RoomOrderListService {
 	}
 	
 	public RoomOrderListVO updateRoom_order_list(Integer room_order_list_id,Integer room_id,Integer room_order_id,Integer number_of_people,
-			Date arrival_date,Date departure_date,String special_req,Integer room_price,Integer service_order_id) {
+			Date arrival_date,Date departure_date,String special_req,Integer room_price,Integer service_order_id,Integer room_type_id) {
 		RoomOrderListVO roomOrderListVO = new RoomOrderListVO();
 		
 		roomOrderListVO.setRoom_order_list_id(room_order_list_id);
@@ -42,6 +43,7 @@ public class RoomOrderListService {
 		roomOrderListVO.setSpecial_req(special_req);
 		roomOrderListVO.setRoom_price(room_price);
 		roomOrderListVO.setService_order_id(service_order_id);
+		roomOrderListVO.setRoom_type_id(room_type_id);
 		
 		dao.update(roomOrderListVO);
 	

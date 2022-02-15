@@ -65,6 +65,7 @@
 		<th>特殊要求</th>
 		<th>房間價格</th>
 		<th>服務訂單編號</th>
+		<th>房型編號</th>
 		<th>修改</th>
 		<th>刪除</th>
 	</tr>
@@ -81,6 +82,7 @@
 			<td>${roomOrderListVO.special_req}</td>
 			<td>${roomOrderListVO.room_price}</td>
 			<td>${roomOrderListVO.service_order_id}</td>
+			<td>${roomOrderListVO.room_type_id}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/roomOrderList/room_order_list.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">

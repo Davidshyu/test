@@ -12,6 +12,7 @@ public class RoomOrderListVO {
 	private String special_req;
 	private Integer room_price;
 	private Integer service_order_id;
+	private Integer room_type_id;
 	
 	public Integer getRoom_order_list_id() {
 		return room_order_list_id;
@@ -66,6 +67,12 @@ public class RoomOrderListVO {
 	}
 	public void setService_order_id(Integer service_order_id) {
 		this.service_order_id = service_order_id;
+	}
+	public Integer getRoom_type_id() {
+		return room_type_id;
+	}
+	public void setRoom_type_id(Integer room_type_id) {
+		this.room_type_id = room_type_id;
 	}
 	
 	

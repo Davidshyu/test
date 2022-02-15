@@ -33,15 +33,15 @@ public class RoomOrderListDAO implements RoomOrderListDAO_interface  {
 	
 
 	private static final String INSERT_STMT = 
-	"INSERT INTO CFA104G1.ROOM_ORDER_LIST (room_id,room_order_id,number_of_people,arrival_date,departure_date,special_req,room_price,service_order_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	"INSERT INTO CFA104G1.ROOM_ORDER_LIST (room_id,room_order_id,number_of_people,arrival_date,departure_date,special_req,room_price,service_order_id,room_type_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
 	private static final String GET_ALL_STMT = 
-	"SELECT room_order_list_id,room_id,room_order_id,number_of_people,arrival_date,departure_date,special_req,room_price,service_order_id FROM CFA104G1.ROOM_ORDER_LIST order by room_order_list_id";
+	"SELECT room_order_list_id,room_id,room_order_id,number_of_people,arrival_date,departure_date,special_req,room_price,service_order_id,room_type_id FROM CFA104G1.ROOM_ORDER_LIST order by room_order_list_id";
 	private static final String GET_ONE_STMT = 
-	"SELECT room_order_list_id,room_id,room_order_id,number_of_people,arrival_date,departure_date,special_req,room_price,service_order_id FROM CFA104G1.ROOM_ORDER_LIST where room_order_list_id = ?";
+	"SELECT room_order_list_id,room_id,room_order_id,number_of_people,arrival_date,departure_date,special_req,room_price,service_order_id,room_type_id FROM CFA104G1.ROOM_ORDER_LIST where room_order_list_id = ?";
 	private static final String DELETE = 
 	"DELETE FROM CFA104G1.ROOM_ORDER_LIST where room_order_list_id = ?";
 	private static final String UPDATE = 
-	"UPDATE CFA104G1.ROOM_ORDER_LIST set room_id=?,room_order_id=?, number_of_people=?, arrival_date=?, departure_date=?, special_req=?,room_price=?,service_order_id=? where room_order_list_id = ?";
+	"UPDATE CFA104G1.ROOM_ORDER_LIST set room_id=?,room_order_id=?, number_of_people=?, arrival_date=?, departure_date=?, special_req=?,room_price=?,service_order_id=?,room_type_id=? where room_order_list_id = ?";
 
 	@Override
 	public void insert(RoomOrderListVO roomOrderListVO) {
@@ -62,6 +62,7 @@ public class RoomOrderListDAO implements RoomOrderListDAO_interface  {
 			pstmt.setString(6, roomOrderListVO.getSpecial_req());
 			pstmt.setInt(7, roomOrderListVO.getRoom_price());
 			pstmt.setInt(8, roomOrderListVO.getService_order_id());
+			pstmt.setInt(9, roomOrderListVO.getRoom_type_id());
 			
 
 			pstmt.executeUpdate();
@@ -110,7 +111,8 @@ public class RoomOrderListDAO implements RoomOrderListDAO_interface  {
 			pstmt.setString(6, roomOrderListVO.getSpecial_req());
 			pstmt.setInt(7, roomOrderListVO.getRoom_price());
 			pstmt.setInt(8, roomOrderListVO.getService_order_id());
-			pstmt.setInt(9, roomOrderListVO.getRoom_order_list_id());
+			pstmt.setInt(9, roomOrderListVO.getRoom_type_id());
+			pstmt.setInt(10, roomOrderListVO.getRoom_order_list_id());
 		
 			pstmt.executeUpdate();
 		
@@ -205,6 +207,7 @@ public class RoomOrderListDAO implements RoomOrderListDAO_interface  {
 				roomOrderListVO.setSpecial_req(rs.getString("special_req"));
 				roomOrderListVO.setRoom_price(rs.getInt("room_price"));
 				roomOrderListVO.setService_order_id(rs.getInt("service_order_id"));
+				roomOrderListVO.setRoom_type_id(rs.getInt("room_order_list_id"));
 				
 			}
 
@@ -265,6 +268,7 @@ public class RoomOrderListDAO implements RoomOrderListDAO_interface  {
 				roomOrderListVO.setSpecial_req(rs.getString("special_req"));
 				roomOrderListVO.setRoom_price(rs.getInt("room_price"));
 				roomOrderListVO.setService_order_id(rs.getInt("service_order_id"));
+				roomOrderListVO.setRoom_type_id(rs.getInt("room_order_list_id"));
 				list.add(roomOrderListVO); // Store the row in the list
 			}
 

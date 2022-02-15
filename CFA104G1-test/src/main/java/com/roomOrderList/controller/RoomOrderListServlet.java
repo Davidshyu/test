@@ -144,6 +144,7 @@ public class RoomOrderListServlet extends HttpServlet{
 				
 				Integer room_price = new Integer(req.getParameter("room_price").trim());
 				Integer service_order_id = new Integer(req.getParameter("service_order_id").trim());
+				Integer room_type_id = new Integer(req.getParameter("room_type_id").trim());
 				
 				
 				RoomOrderListVO roomOrderListVO = new RoomOrderListVO();
@@ -156,6 +157,7 @@ public class RoomOrderListServlet extends HttpServlet{
 				roomOrderListVO.setSpecial_req(special_req);
 				roomOrderListVO.setRoom_price(room_price);
 				roomOrderListVO.setService_order_id(service_order_id);
+				roomOrderListVO.setRoom_type_id(room_type_id);
 				
 				
 				if(!errorMsgs.isEmpty()) {
@@ -167,7 +169,7 @@ public class RoomOrderListServlet extends HttpServlet{
 			
 				/***************************2.開始修改資料*****************************************/
 				RoomOrderListService roomOrderListSvc = new RoomOrderListService();
-				roomOrderListVO = roomOrderListSvc.updateRoom_order_list(room_order_list_id, room_id, room_order_id, number_of_people, arrival_date, departure_date, special_req,room_price,service_order_id);
+				roomOrderListVO = roomOrderListSvc.updateRoom_order_list(room_order_list_id, room_id, room_order_id, number_of_people, arrival_date, departure_date, special_req,room_price,service_order_id,room_type_id);
 			
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("roomOrderListVO", roomOrderListVO); // 資料庫update成功後,正確的的empVO物件,存入req
@@ -219,6 +221,7 @@ public class RoomOrderListServlet extends HttpServlet{
 				
 				Integer room_price = new Integer(req.getParameter("room_price").trim());
 				Integer service_order_id = new Integer(req.getParameter("service_order_id").trim());
+				Integer room_type_id = new Integer(req.getParameter("room_type_id").trim());
 				
 				RoomOrderListVO roomOrderListVO = new RoomOrderListVO();
 				roomOrderListVO.setRoom_id(room_id);
@@ -229,6 +232,7 @@ public class RoomOrderListServlet extends HttpServlet{
 				roomOrderListVO.setSpecial_req(special_req);
 				roomOrderListVO.setRoom_price(room_price);
 				roomOrderListVO.setService_order_id(service_order_id);
+				roomOrderListVO.setRoom_type_id(room_type_id);
 				
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("roomOrderListVO", roomOrderListVO); // 含有輸入格式錯誤的empVO物件,也存入req
@@ -238,7 +242,7 @@ public class RoomOrderListServlet extends HttpServlet{
 				}
 				/***************************2.開始新增資料***************************************/
 				RoomOrderListService roomOrderListSvc = new RoomOrderListService();
-				roomOrderListVO = roomOrderListSvc.addRoom_order_list(room_id, room_order_id, number_of_people, arrival_date, departure_date, special_req,room_price,service_order_id);
+				roomOrderListVO = roomOrderListSvc.addRoom_order_list(room_id, room_order_id, number_of_people, arrival_date, departure_date, special_req,room_price,service_order_id,room_type_id);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				String url = "listAllRoomOrderList.jsp";
@@ -298,9 +302,9 @@ public class RoomOrderListServlet extends HttpServlet{
 			req.setAttribute("roomOrderListVO", roomOrderListVO);
 			
 				
-				String url = "/";
-				RequestDispatcher successView = req.getRequestDispatcher(url);
-				successView.forward(req, res);		
+			String url = "/front-end/checkout.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);		
 				
 			
 		}

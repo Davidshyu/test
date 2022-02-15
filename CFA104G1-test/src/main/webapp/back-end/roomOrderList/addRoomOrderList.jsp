@@ -5,6 +5,7 @@
 <%
 
 	RoomOrderListVO roomOrderListVO = (RoomOrderListVO) request.getAttribute("roomOrderListVO");
+roomOrderListVO.getRoom_type_id();
 %>
 
 <html>
@@ -106,6 +107,11 @@
 		<td><input type="TEXT" name="service_order_id" size="45"
 			 value="<%= (roomOrderListVO==null)? "" : roomOrderListVO.getService_order_id()%>" /></td>
 	</tr>
+	<tr>
+		<td>房型編號:</td>
+		<td><input type="TEXT" name="service_order_id" size="45"
+			 value="<%= (roomOrderListVO==null)? "" : roomOrderListVO.getRoom_type_id()%>" /></td>
+	</tr>
 
 	
 
@@ -152,6 +158,9 @@ $(function(){
 	
 	 var today = new Date();
   		$('#arrival_date').datetimepicker({
+  		format:'Y-m-d',
+  		value:  new Date(),
+  	    timepicker:false,
         beforeShowDay: function(date) {
     	  if (  date.getYear() <  today.getYear() || 
 		           (date.getYear() == today.getYear() && date.getMonth() <  today.getMonth()) || 
@@ -161,16 +170,7 @@ $(function(){
           }
           return [true, ""];
   		}});  
-	 $('#arrival_date').datetimepicker({
-	  format:'Y-m-d',
-	  onShow:function(){
-	   this.setOptions({
-	    maxDate:$('#departure_date').val()?$('#departure_date').val():false
-	   })
-	  },
-	  timepicker:false,
-	  value:   new Date(),
-	 });
+	
 	 
 	 $('#departure_date').datetimepicker({
 	  format:'Y-m-d',

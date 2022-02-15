@@ -99,9 +99,13 @@ RoomOrderListVO roomOrderListVO = (RoomOrderListVO) request.getAttribute("roomOr
 		<td>房間價格:</td>
 		<td><input type="TEXT" name="room_price" size="45" value="<%=roomOrderListVO.getRoom_price()%>" /></td>
 	</tr>
-		<tr>
+	<tr>
 		<td>服務訂單編號:</td>
 		<td><input type="TEXT" name="service_order_id" size="45" value="<%=roomOrderListVO.getService_order_id()%>" /></td>
+	</tr>
+		<tr>
+		<td>房型編號:</td>
+		<td><input type="TEXT" name="room_type_id" size="45" value="<%=roomOrderListVO.getRoom_type_id()%>" /></td>
 	</tr>
 	
 	
